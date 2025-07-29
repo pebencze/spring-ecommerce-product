@@ -1,5 +1,37 @@
 # spring-ecommerce-product
 
+## Refactoring List
+
+- [ ] all Controllers use DTOs
+  - [ ] change DTO names to more specific names e.g. *DTO -> *Response
+  - [ ] move validation logic to DTOs, do not validate inside Models
+  - [ ] bundle related DTOs into the same file 
+- [ ] repos use Entity (or sometimes DTO?)
+  - [ ] StatRepository can return Member and ProductStat
+- [ ] separate CartsRepository from CartItemsRepository
+- [ ] more OOP style inside the service e.g. -> retrieve cart -> retrieve product -> create cart item -> add item to cart -> return response
+- [ ] turn data class into simple class if you implement your own hashcode() and equals() implementations
+
+### Tests
+- [ ] test refactored CartRepository
+- [ ] use init.sql script with @Sql inside CartE2ETest
+- [ ] test for Services
+- [ ] try Mock for E2E
+
+### Optional
+- [ ] chain operations e.g.:
+```kotlin
+fun createToken(tokenRequest: TokenRequest): TokenResponse {
+        return jwtTokenProvider
+            .createToken(tokenRequest.email)
+            .let(::TokenResponse)
+    }
+```
+
+### Miscellaneous
+- [ ] change from INT to BIGINT inside `schema.sql`
+---
+
 ## Step 1-1
 
 Implements a simple HTTP API that allows users to **retrieve**, **add**, **update**, and **delete** products.<br/>
