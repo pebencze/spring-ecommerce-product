@@ -12,11 +12,16 @@ class Station(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0L,
 
-    @ManyToOne
+    @ManyToOne(cascade = [(CascadeType.PERSIST)])
     @JoinColumn(name = "line_id")
     var line: Line? = null,
 ) {
     fun changeName(name: String) {
         this.name = name
+    }
+
+    fun updateLine(line: Line) {
+        this.line = line
+        line.stations.add(this)
     }
 }
